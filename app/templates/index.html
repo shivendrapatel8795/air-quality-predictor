@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AQI Predictor</title>
+</head>
+<body>
+
+    <h2>Air Quality Prediction</h2>
+
+    <form method="post">
+        <input name="PM2.5" placeholder="PM2.5"><br><br>
+        <input name="PM10" placeholder="PM10"><br><br>
+        <input name="NO2" placeholder="NO2"><br><br>
+        <input name="SO2" placeholder="SO2"><br><br>
+        <input name="CO" placeholder="CO"><br><br>
+        <input name="O3" placeholder="O3"><br><br>
+    </form>
+
+    <form method="post">
+        <label>Select City:</label>
+        <select name="city">
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Lucknow">Lucknow</option>
+        </select>
+
+        <br><br>
+        <button type="submit">Predict AQI</button>
+    </form>
+
+    {% if prediction %}
+        <h3>Predicted AQI: {{ prediction }}</h3>
+        <h3>Category: {{ category }}</h3>
+    {% endif %}
+
+</body>
+</html>
