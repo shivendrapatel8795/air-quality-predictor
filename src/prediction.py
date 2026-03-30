@@ -6,6 +6,10 @@ model = joblib.load("models/aqi_model.pkl")
 # cleaned data load
 df = pd.read_csv("data/processed/aqi_cleaned.csv")
 
+def predict_aqi(data):
+    result = model.predict([data])
+    return result[0]
+
 def predict_by_city(city):
     # filter city data
     city_data = df[df['City'] == city]
@@ -27,3 +31,4 @@ def get_aqi_category(aqi):
         return "Unhealthy 😷"
     else:
         return "Hazardous ☠️"
+

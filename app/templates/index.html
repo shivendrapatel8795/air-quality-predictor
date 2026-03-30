@@ -2,36 +2,73 @@
 <html>
 <head>
     <title>AQI Predictor</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <div class="container">
 
-    <h2>Air Quality Prediction</h2>
+        <h2>🌍 AQI Predictor</h2>
+        <p class="subtitle">Check air quality using manual input or city data</p>
 
-    <form method="post">
-        <input name="PM2.5" placeholder="PM2.5"><br><br>
-        <input name="PM10" placeholder="PM10"><br><br>
-        <input name="NO2" placeholder="NO2"><br><br>
-        <input name="SO2" placeholder="SO2"><br><br>
-        <input name="CO" placeholder="CO"><br><br>
-        <input name="O3" placeholder="O3"><br><br>
-    </form>
+        <!-- SINGLE FORM -->
+        <form method="post">
 
-    <form method="post">
-        <label>Select City:</label>
-        <select name="city">
-            <option value="Delhi">Delhi</option>
-            <option value="Mumbai">Mumbai</option>
-            <option value="Lucknow">Lucknow</option>
-        </select>
+            <!-- Manual Input -->
+            <div class="section">
+                <h3>🔹 Enter Pollution Values</h3>
 
-        <br><br>
-        <button type="submit">Predict AQI</button>
-    </form>
+                <input type="number" step="any" name="PM2.5" placeholder="PM2.5">
+                <input type="number" step="any" name="PM10" placeholder="PM10">
+                <input type="number" step="any" name="NO2" placeholder="NO2">
+                <input type="number" step="any" name="SO2" placeholder="SO2">
+                <input type="number" step="any" name="CO" placeholder="CO">
+                <input type="number" step="any" name="O3" placeholder="O3">
+            </div>
 
-    {% if prediction %}
-        <h3>Predicted AQI: {{ prediction }}</h3>
-        <h3>Category: {{ category }}</h3>
-    {% endif %}
+            <!-- Divider -->
+            <div class="divider">OR</div>
 
+            <!-- City Selection -->
+            <div class="section">
+                <h3>🔹 Select City</h3>
+                <select name="city">
+                    <option value="">-- Select City --</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Lucknow">Lucknow</option>
+                </select>
+            </div>
+
+            <button type="submit">Predict AQI</button>
+        </form>
+
+        <!-- RESULT -->
+        {% if prediction %}
+        <div class="result">
+
+            <p class="aqi">AQI: {{ prediction }}</p>
+
+            <p class="
+                {% if category == 'Good 😊' %}good
+                {% elif category == 'Moderate 😐' %}moderate
+                {% elif category == 'Unhealthy 😷' %}unhealthy
+                {% else %}hazardous
+                {% endif %}
+            ">
+                {{ category }}
+            </p>
+
+            <p class="mode">Mode: {{ mode }}</p>
+
+        </div>
+        {% endif %}
+
+    </div>
 </body>
 </html>
